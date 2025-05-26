@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: Arial, sans-serif;
+        margin-bottom: 30px;
+      }
+
+      thead {
+        background-color: #007bff;
+        color: white;
+      }
+
+      th,
+      td {
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        text-align: center;
+      }
+
+      tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+
+      tbody tr:hover {
+        background-color: #e9f2ff;
+      }
+
+      form {
+        width: 500px;
+        margin: 0 auto;
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+      }
+
+      label {
+        display: block;
+        margin-top: 10px;
+        margin-bottom: 6px;
+        font-weight: bold;
+      }
+
+      input[type="number"],
+      select {
+        width: 95%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+      }
+
+      button[type="submit"] {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 16px;
+        border: none;
+        border-radius: 5px;
+        font-size: 14px;
+        cursor: pointer;
+        width: 100%;
+      }
+
+      button[type="submit"]:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <thead>
+        <tr>
+          {% for col in columns %}
+          <th>{{col}}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in rows %}
+        <tr>
+          {% for column in columns%}
+          <td>{{row[column] }}</td>
+          {% endfor %}
+        </tr>
+        {%endfor%}
+      </tbody>
+    </table>
+    <form method="POST" action="{{ url_for('validate_post', id=admin_id) }}">
+      <label for="post_id">Post Id:</label><br />
+      <input type="number" id="post_id" name="post_id" required /><br />
+
+      <label for="decision">Decision:</label><br />
+      <select id="decision" name="decision" required>
+        <option value="" disabled selected>--select an operation--</option>
+        <option value="approve">Approve</option>
+        <option value="delete">Delete</option></select
+      ><br />
+
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>

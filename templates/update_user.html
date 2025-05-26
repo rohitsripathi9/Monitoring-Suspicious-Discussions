@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Update_User</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f7f8;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      form {
+        background: white;
+        padding: 30px 40px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        width: 320px;
+      }
+      h2 {
+        margin-bottom: 20px;
+        color: #333;
+        text-align: center;
+      }
+      label {
+        font-weight: 600;
+        color: #555;
+      }
+      input[type="text"],
+      input[type="password"],
+      select {
+        width: 100%;
+        padding: 10px 12px;
+        margin-top: 6px;
+        margin-bottom: 15px;
+        border: 1.5px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+        box-sizing: border-box;
+        transition: border-color 0.3s ease;
+      }
+      input[type="text"]:focus,
+      input[type="password"]:focus,
+      select:focus {
+        border-color: #007bff;
+        outline: none;
+      }
+      button {
+        width: 100%;
+        background-color: #007bff;
+        color: white;
+        padding: 12px 0;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+      p {
+        text-align: center;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <form method="post" action="{{ url_for('update_user', id=user_id) }}">
+      <h2>Update Details</h2>
+      {% if message %}
+      <p>
+        <script>
+          alert("{{message}}");
+        </script>
+      </p>
+      {%endif%}
+      <label for="username">Username</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        value="{{ username or '' }}"
+        required
+      />
+      <label for="email">Email id</label>
+      <input
+        type="text"
+        id="email"
+        name="email"
+        value="{{ email or '' }}"
+        required
+      />
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required />
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>

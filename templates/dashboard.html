@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Dashboard</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f4f6f9;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 20px;
+      }
+
+      .dashboard-header {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .dashboard-header h1 {
+        font-size: 32px;
+        margin-bottom: 10px;
+        color: #007bff;
+      }
+
+      .dashboard-header p {
+        font-size: 16px;
+        color: #555;
+      }
+
+      .card {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        margin-bottom: 30px;
+      }
+
+      .card h3 {
+        margin-top: 0;
+        color: #333;
+        margin-bottom: 15px;
+      }
+
+      .user-data p,
+      .post-container p {
+        margin: 8px 0;
+        font-size: 20px;
+        color: #444;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        margin: 10px 10px 10px 0;
+        font-size: 15px;
+        color: white;
+        background-color: #007bff;
+        border: none;
+        border-radius: 6px;
+        text-decoration: none;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+      }
+
+      .btn:hover {
+        background-color: #0056b3;
+        transform: translateY(-2px);
+        cursor: pointer;
+      }
+
+      .post-container {
+        background-color: #fefefe;
+        border-left: 5px solid #007bff;
+        border-radius: 8px;
+        padding: 15px 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+      }
+
+      .post-container p strong {
+        color: #222;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="dashboard-header">
+        <h1>Your Dashboard</h1>
+        <p>Welcome to your profile and posts overview</p>
+      </div>
+
+      <div class="card user-data">
+        <h3>Your Data</h3>
+        {% for column in columns %} {% if not loop.last %}
+        <p><strong>{{ column }}</strong>: {{ user_data[column] }}</p>
+        {% endif %} {% endfor %}
+      </div>
+
+      <div>
+        <a href="{{ url_for('viewallposts') }}" class="btn">View All Posts</a>
+        <a
+          href="{{ url_for('create_post', id=user_data['user_id']) }}"
+          class="btn"
+          >Create a Post</a
+        >
+        <a href="{{ url_for('logout')}}" class="btn">Logout</a>
+      </div>
+      <br />
+      <div class="card">
+        <h3>Your Posts</h3>
+        {% for post in posts %}
+        <div class="post-container">
+          {% for column in post_columns %}
+          <p><strong>{{ column }}</strong>: {{ post[column] }}</p>
+          {% endfor %}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </body>
+</html>

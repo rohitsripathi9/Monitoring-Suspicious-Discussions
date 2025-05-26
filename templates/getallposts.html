@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Posts</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: #eef4fb;
+        margin: 0;
+        padding: 30px;
+      }
+
+      h1 {
+        color: #0056b3;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .post-container {
+        background: white;
+        border-left: 5px solid #007bff;
+        padding: 20px 25px;
+        margin: 20px auto;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 123, 255, 0.1);
+        transition: transform 0.2s, box-shadow 0.2s;
+        width: 90%;
+        max-width: 700px;
+      }
+
+      .post-container:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 16px rgba(0, 123, 255, 0.15);
+      }
+
+      .post-container p {
+        margin: 10px 0;
+        font-size: 16px;
+        line-height: 1.6;
+        color: #333;
+      }
+
+      .post-container strong {
+        color: #007bff;
+      }
+
+      @media (max-width: 600px) {
+        .post-container {
+          padding: 15px 20px;
+        }
+
+        .post-container p {
+          font-size: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>User Posts</h1>
+    {% for post in posts %}
+    <div class="post-container">
+      {% for column in post_columns %}
+      <p><strong>{{ column }}:</strong> {{ post[column] }}</p>
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </body>
+</html>
